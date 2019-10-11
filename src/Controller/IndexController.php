@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Newsletter;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -15,9 +16,9 @@ class IndexController extends AbstractController
      * @Route("/", name="homepage")
      * méthode de la page d'accueil
      */
-    public function index()
+    public function index(EntityManagerInterface $em)
     {
-        $em =$this->getDoctrine()->getManager();
+        // $em =$this->getDoctrine()->getManager();
 
         $newsletterItem = new Newsletter();
         $newsletterItem->setEmail('me.crob@me.com')
