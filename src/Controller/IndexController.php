@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Newsletter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -16,9 +17,15 @@ class IndexController extends AbstractController
      */
     public function index()
     {
+        $em =$this->getDoctrine()->getManager();
+
+        $newsletterItem = new Newsletter();
+        $newsletterItem->setEmail('me.crob@me.com')
+                    ->getSubscribed(true);
+
         return $this->render(
             'index/index.html.twig', 
-            ['controller_name' => 'IndexController',]
+            ['newsletterItem' => $newsletterItem]
         );
     }
 
