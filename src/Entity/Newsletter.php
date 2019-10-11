@@ -33,6 +33,12 @@ class Newsletter
      */
     private $created;
 
+    public function __construct()
+    {
+    $this->subscribed = true;
+    }
+
+    
     public function getId(): ?int
     {
         return $this->id;

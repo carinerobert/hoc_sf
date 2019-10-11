@@ -21,7 +21,7 @@ class IndexController extends AbstractController
      */
     public function index(
         Request $request,
-        NewsletterRepository $newsletterRepository)
+        EntityManagerInterface $em)
     {
         // $em =$this->getDoctrine()->getManager();
         // inutile avec l'injection de dépendance faite par entitymanagerinterface..
@@ -32,10 +32,12 @@ class IndexController extends AbstractController
 
         $newsletterItem = new Newsletter();
         $form = $this->createForm(NewsletterType::class, $newsletterItem);
+        // En cas de requête 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
+            $em->persist($newsletterItem);
+            $em->flush();
         }
 
         return $this->render(
