@@ -21,7 +21,7 @@ class IndexController extends AbstractController
 
         $newsletterItem = new Newsletter();
         $newsletterItem->setEmail('me.crob@me.com')
-                    ->getSubscribed(true);
+                ->getSubscribed(true);
 
         return $this->render(
             'index/index.html.twig', 
