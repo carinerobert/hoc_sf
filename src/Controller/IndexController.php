@@ -7,6 +7,7 @@ use App\Form\NewsletterType;
 use App\Repository\NewsletterRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class IndexController extends AbstractController
@@ -18,7 +19,9 @@ class IndexController extends AbstractController
      * @Route("/", name="homepage")
      * méthode de la page d'accueil
      */
-    public function index(NewsletterRepository $newsletterRepository)
+    public function index(
+        Request $request,
+        NewsletterRepository $newsletterRepository)
     {
         // $em =$this->getDoctrine()->getManager();
         // inutile avec l'injection de dépendance faite par entitymanagerinterface..
@@ -29,6 +32,11 @@ class IndexController extends AbstractController
 
         $newsletterItem = new Newsletter();
         $form = $this->createForm(NewsletterType::class, $newsletterItem);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+        }
 
         return $this->render(
             'index/index.html.twig', 
