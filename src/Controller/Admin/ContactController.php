@@ -13,8 +13,8 @@ class ContactController extends AbstractController
      */
     public function index(ContactRepository $contactRepository)
     {
-        $contactsAll = $contactRepository->findAll();
+        $contactsDemand = $contactRepository->findAll();
         return $this->render('admin/contact/index.html.twig', 
-        [ 'contactsAll' =>$contactsAll]);
+        [ 'contactsDemand' =>$contactsDemand]);
     }
 }
