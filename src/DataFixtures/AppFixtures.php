@@ -5,20 +5,22 @@ namespace App\DataFixtures;
 use App\Entity\Contact;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Faker\Factory;
 
 class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        // $product = new Product();
+        $faker = Factory::create('fr_FR');
+
         for ($i = 0; $i < 30; $i++) {
 
                 $contact = new Contact();
-                $contact ->setNom("Curie")
-                    ->setPrenom("Marie")
-                    ->setEmail("marie@curie.com")
-                    ->setObjet("Ma demande n°$i")
-                    ->setMessage("Mon message n°$i");
+                $contact ->setNom($faker->lastName)
+                    ->setPrenom($faker->firstName)
+                    ->setEmail($faker->email)
+                    ->setObjet($faker->sentence(6, true))
+                    ->setMessage($faker->paragraph(7, true));
 
                 $manager->persist($contact);
 
