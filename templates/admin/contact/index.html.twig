@@ -1,0 +1,30 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Liste des demandes de contact {% endblock %}
+
+{% block content %}
+<div>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Nom</th>
+      <th scope="col">Prenom</th>
+      <th scope="col">Email</th>
+      <th scope="col">Objet</th>
+      <th scope="col">Message</th>
+    </tr> 
+    </thead>
+  <tbody>
+    {% for contact in contactsAll %}
+                    <td>{{ contact.nom }}</td>
+                    <td>{{ contact.prenom }}</td>
+                    <td>{{ contact.email }}</td> 
+                    <td>{{ contact.objet }}</td>
+                    <td>{{ contact.message }}</td>
+                    </tr>
+    {% endfor %}
+    </tbody>
+   </table>
+</div>
+{% endblock %}
+
