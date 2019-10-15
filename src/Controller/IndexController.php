@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Newsletter;
-use App\Form\NewsletterType;
+use App\Form\NewsletterRegisterType;
 use App\Repository\NewsletterRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -31,7 +31,7 @@ class IndexController extends AbstractController
         //);
 
         $newsletterItem = new Newsletter();
-        $form = $this->createForm(NewsletterType::class, $newsletterItem);
+        $form = $this->createForm(NewsletterRegisterType::class, $newsletterItem);
         // En cas de requête 
         $form->handleRequest($request);
 

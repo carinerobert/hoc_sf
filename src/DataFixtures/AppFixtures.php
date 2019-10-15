@@ -41,13 +41,14 @@ class AppFixtures extends Fixture
         
         $user = new User();
         $user->setLogin('Bob');
-           // On utilise le service injecté à la construction
+        // On utilise le service injecté à la construction
         // Pour encoder notre mot de passe et l'affecter directement
         // à notre champ Password
         $user->setPassword($this->passwordEncoder->encodePassword(
             $user, '1234'
         ));
-        $user = setRoles(['ROLE_ADMIN']);
+        $user->setRoles(['ROLE_ADMIN']);
+
         $manager->persist($user);
 
         $manager->flush();
