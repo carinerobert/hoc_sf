@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/layout.html.twig' %}
 
 {% block title %}Newsletter{% endblock %}
 
@@ -19,16 +19,12 @@
                 <th>Id</th>
                 <td>{{ newsletter.id }}</td>
             </tr>
-            <tr>
-                <th>Created</th>
-                <td>{{ newsletter.created ? newsletter.created|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('newsletter_index') }}">back to list</a>
+    <a href="{{ path('admin_newsletter_index') }}">back to list</a>
 
-    <a href="{{ path('newsletter_edit', {'id': newsletter.id}) }}">edit</a>
+    <a href="{{ path('admin_newsletter_edit', {'id': newsletter.id}) }}">edit</a>
 
-    {{ include('newsletter/_delete_form.html.twig') }}
+    {{ include('admin/newsletter/_delete_form.html.twig') }}
 {% endblock %}

@@ -21,7 +21,6 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute('admin_contact_index');
         }
 
-
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
