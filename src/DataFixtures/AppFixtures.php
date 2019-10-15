@@ -2,13 +2,26 @@
 
 namespace App\DataFixtures;
 
+
 use App\Entity\Contact;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
 {
+    //injection de dépendance par constructeur
+    private $passwordEncoder;
+
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $this->passwordEncoder = $passwordEncoder;
+
+    }
+
+
     public function load(ObjectManager $manager)
     {
         $faker = Factory::create('fr_FR');
@@ -26,6 +39,16 @@ class AppFixtures extends Fixture
 
         }
         
+        $user = new User();
+        $user->setLogin('Bob');
+           // On utilise le service injecté à la construction
+        // Pour encoder notre mot de passe et l'affecter directement
+        // à notre champ Password
+        $user->setPassword($this->passwordEncoder->encodePassword(
+            $user, '1234'
+        ));
+        $user = setRoles(['ROLE_ADMIN']);
+        $manager->persist($user);
 
         $manager->flush();
     }
