@@ -3,28 +3,28 @@
 {% block title %}Liste des demandes de contact{% endblock %}
 
 {% block content %}
-<div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">Nom</th>
-      <th scope="col">Prenom</th>
-      <th scope="col">Email</th>
-      <th scope="col">Objet</th>
-      <th scope="col">Message</th>
-    </tr> 
-    </thead>
-  <tbody>
-    {% for contact in contactsDemand %}
-                    <td>{{ contact.nom }}</td>
-                    <td>{{ contact.prenom }}</td>
-                    <td>{{ contact.email }}</td> 
-                    <td>{{ contact.objet }}</td>
-                    <td>{{ contact.message }}</td>
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                <th scope="col">N°</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prénom</th>
+                <th scope="col">Email</th>
+                <th scope="col">Objet</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for contact in contacts %}
+                    <tr>
+                        <td>{{ loop.index is odd }}</td>
+                        <td>{{ contact.nom }}</td>
+                        <td>{{ contact.prenom }}</td>
+                        <td>{{ contact.email }}</td>
+                        <td>{{ contact.objet }}</td>
                     </tr>
-    {% endfor %}
-    </tbody>
-   </table>
-</div>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
-

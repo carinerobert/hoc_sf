@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Newsletter;
 use App\Form\NewsletterType;
@@ -20,7 +20,7 @@ class NewsletterController extends AbstractController
      */
     public function index(NewsletterRepository $newsletterRepository): Response
     {
-        return $this->render('newsletter/index.html.twig', [
+        return $this->render('admin/newsletter/index.html.twig', [
             'newsletters' => $newsletterRepository->findAll(),
         ]);
     }
@@ -39,10 +39,10 @@ class NewsletterController extends AbstractController
             $entityManager->persist($newsletter);
             $entityManager->flush();
 
-            return $this->redirectToRoute('newsletter_index');
+            return $this->redirectToRoute('admin_newsletter_index');
         }
 
-        return $this->render('newsletter/new.html.twig', [
+        return $this->render('admin/newsletter/new.html.twig', [
             'newsletter' => $newsletter,
             'form' => $form->createView(),
         ]);
@@ -53,7 +53,7 @@ class NewsletterController extends AbstractController
      */
     public function show(Newsletter $newsletter): Response
     {
-        return $this->render('newsletter/show.html.twig', [
+        return $this->render('admin/newsletter/show.html.twig', [
             'newsletter' => $newsletter,
         ]);
     }
@@ -69,10 +69,10 @@ class NewsletterController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('newsletter_index');
+            return $this->redirectToRoute('admin_newsletter_index');
         }
 
-        return $this->render('newsletter/edit.html.twig', [
+        return $this->render('admin/newsletter/edit.html.twig', [
             'newsletter' => $newsletter,
             'form' => $form->createView(),
         ]);
@@ -83,12 +83,12 @@ class NewsletterController extends AbstractController
      */
     public function delete(Request $request, Newsletter $newsletter): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$newsletter->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $newsletter->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($newsletter);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('newsletter_index');
+        return $this->redirectToRoute('admin_newsletter_index');
     }
 }
